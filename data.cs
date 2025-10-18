@@ -8,7 +8,7 @@ namespace constructions
 {
     internal  class data 
     {
-        
+        public  Dictionary<string, (double X, double Y)> points = new Dictionary<string, (double X, double Y)>();
         public  double[,] POINT=new double [100,100];
         public static string surveyors_list;
         public static string  building_list;
@@ -25,17 +25,27 @@ namespace constructions
         { 
 
             
-
+           
             return POINT[ROW,1];
         }
-       public  void STORE_POINT( int row,double X,double Y)
+        
+        public  double DEGREE = 0.01745329251994329576;
+        public  double A(double B, double c) { return Math.Sqrt(B * B + c * c); }
+        public  void STORE_POINT( int row,double X,double Y)
         {
-            
+            int n = points.Count + 1;
+            n = row + n;
+            string name= "point " + n.ToString();
+      
+            points.Add(name, (X, Y));
             POINT[row, 0] = X; POINT[row, 1] =Y;
+          
+           
+            Console.WriteLine("{0} stored in points:{1}",name, points[ name]);
             Console.WriteLine("new point stored X={1},Y={2} ,name:p({0})",row,POINT.GetValue(row,0 ), POINT.GetValue(row, 1));
            
         }
-        public double angel_A (double D1,double D2,double D3)
+        public double angel_from_ab_to_ac_turn_left (double D1,double D2,double D3)
 
         {
 
@@ -44,8 +54,8 @@ namespace constructions
         /*pointa,pointb,distant_to_a,distant_to_b,angel_(bac)(c is new point)*/
         public  void  new_point_measure (int name, double x1, double y1 ,double x2,double y2,double D1,double D2 ,double a)// (a=b^2+c^2-a^2)/2ab 
         {
-            
-             
+
+
             double m0 = (y2 - y1) / (x2 - x1);// ميل المستقيم ab
             double m1; //ميل المستقيم ac
             double  x;
@@ -57,18 +67,23 @@ namespace constructions
             // d1,d2ونصف قطرهما  a,b  يستنتج من معادلتي الدائرتين التي مركزهما   
             double z = (Math.Pow(D1, 2) - Math.Pow(D2, 2) + Math.Pow(x2, 2) - Math.Pow(x1, 2) + Math.Pow(y2, 2) - Math.Pow(y1, 2))/2;
            
-                x = (z + m1 * x1 * (y2 - y1) - y2 * (y2 - y1)) / (x2 - x1) + m1 * (y2 - y1);
-                y = m1 * (x - x1) + y1;
-           
-                //في حال الرفع المساحي
+                x = (z + m1 * x1 * (y2 - y1) - y2 * (y2 - y1)) / (x2 - x1) + m1 * (y2 - y1);// حساب احداثي x للنقطة الجديدة
+            y = m1 * (x - x1) + y1;// حساب احداثي y للنقطة الجديدة
 
-               if (name > 100)
-               Console.WriteLine("renter  name <100") ;
+            
+            
+            int n = points.Count + 1;// موقع النقطة الجديدة في القاموس
+            String ne = "point " + name.ToString();// انشاء اسم للنقطة الجديدة
+            points.Add(ne, (x, y));// تخزين النقطة في القاموس
+            Console.WriteLine("{0} stored in points:{1}",ne, points[ne]);// اظهار النقطة المخزنة
+            if (name > 100)
+               Console.WriteLine("enter  name <100");// التحقق من صحة اسم النقطة
             else
-                STORE_POINT(name, x, y); // تخزين النقطة
+                
+            STORE_POINT(name, x, y); // تخزين النقطة
+            Console.WriteLine(" measured point have stored in array :x={0},y={1} p({2})",X(name), Y(name),name);// اظهار النقطة المخزنة
             
-            Console.WriteLine(" measured point have stored:x={0},y={1} p({2})",X(name), Y(name),name);// اظهار النقطة المخزنة
-            ;
+
             
 
 
@@ -77,7 +92,6 @@ namespace constructions
 
 
 
-        
         }
     }
 }

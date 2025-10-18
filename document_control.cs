@@ -11,14 +11,17 @@ namespace constructions
         static void Main()
         {
            
-            relation.new_point_measure(20, 0, 100, 100, 100, 50, 50, 0);
+            relation.new_point_measure("benchmarke", 0, 100, 100, 100, 50, 50, 0);
+            relation.new_point_measure("as builte", 100, 80, 30, 40, 50, 50, 1.5707963267948966);
             relation.Measure_distant(24, 34, 56, 77);
             //overloading constructor take one parameter 
             survey_report request1 = new survey_report( 1);
            Console.WriteLine(  " distant ",request1.Measure_distant(500, 350, 200, 250));
-           Console.WriteLine(" angel a {0}" ,request1.angel_A(150, 200, 316.227));
-            request1.new_point_measure(1,20 ,10, 100, 10, 50, 50,0); 
-            request1.new_point_measure(2, 500, 350, 200, 250, 150, 200, 0.869623356312607);// i put angel as it must be if it measured in site for give right result
+           Console.WriteLine(" angel a {0}" ,request1.angel_from_ab_to_ac_turn_left(150, 200, 316.227));
+            request1.new_point_measure(50,20 ,10, 100, 10, 50, 50,0);
+            request1.Measure_distant(500, 350, 200, 250);
+            request1.angel_from_ab_to_ac_turn_left(150, 200, 316.227);
+            request1.new_point_measure(51, 500, 350, 200, 250, 300, 200, 0.869623356312607);//  put angel as it must be if it measured in site for give right result
 
             request1.STORE_POINT(3, 54.5, 32.44);
             
