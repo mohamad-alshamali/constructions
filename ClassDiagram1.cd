@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="constructions.survey_report">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Position X="0.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>QACIAEAAAAALAAAIYAIAACQCAAgEAAgAAAKIgQBCgAE=</HashCode>
+      <HashCode>QACIAEAAAAAKAAAIYAIBACQCAAgEAAgAAAKIgQBCgAE=</HashCode>
       <FileName>survey_report.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -23,17 +23,17 @@
     </TypeIdentifier>
   </Class>
   <Class Name="constructions.data">
-    <Position X="2.5" Y="1" Width="1.5" />
+    <Position X="3" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAABAACAACAAAAAABABAAAAAEgAAAAAAAAAAoAAAYAA=</HashCode>
       <FileName>data.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="constructions.conseltant">
+  <Class Name="constructions.consultant">
     <Position X="4.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEAIAAAAAABDAAAIQQAICAAAAAAAAAAAAAAAAABAAAA=</HashCode>
-      <FileName>conseltant.cs</FileName>
+      <HashCode>AEAIAAAAAABCAAEIQAAJCAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>consultant.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="constructions.quantity">

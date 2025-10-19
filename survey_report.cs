@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace constructions
 {
-    public delegate void Notify(string message);
-    internal class survey_report :conseltant,quantity
+    public delegate void Notify(string message);//*delegate declaration*/
+    internal class survey_report :consultant, quantity//*derived class from abstract class consultant and interface quantity*/
     {
         
         protected int request_no;/*field*/
@@ -16,15 +16,15 @@ namespace constructions
         protected int drawing_number;/*field*/
         protected string surveyor_name;/* field*/
         protected string measurement_points;/*field*/
-        protected double asbuilt_level;
-        public double area;
-        protected double measure_distant;
-        public event Notify onstatuechange;
-        
-         
+        protected double asbuilt_level;//field
+        public double area;//field
+        protected double measure_distant;//field
+        public event Notify onstatuechange;//*event declaration*/
 
-                public virtual void check (string statue) 
-                {
+
+
+        public virtual void check (string statue) //method to check request statue and trigger event if not accepted
+        {
             if (request_statue != "accepted")
 
                 onstatuechange?.Invoke("request survey report statue : not accepted  ");
@@ -33,52 +33,52 @@ namespace constructions
 
                
 
-        public double volume;
+        public double volume;//field
 
-        public override string Datetime
+        public override string Datetime//override property
 
         {
             get { return datetime; }
             set { datetime = value; }
         }
-        public override string Conseltant_name/*override property*/
+        public override string Consultant_name//override property
         { 
-            set { conseltant_name = value; } 
-            get { return conseltant_name; }
+            set { consultant_name = value; } 
+            get { return consultant_name; }
 
         }
 
-        public string Surveyor_name /*override property*/
+        public string Surveyor_name // property
         {
             set { surveyor_name = value; }
             get { return surveyor_name; }
             
         }
-        public override string Approved_benchmarks /*override property*/
+        public override string Approved_benchmarks //override property
         {
             get { return approved_benchmarks; }
 
             set { approved_benchmarks = value; }
         }
-        public int Request_no /*override property*/
+        public int Request_no //  property
         {
             set { request_no = value; }
             get { return request_no; }
         }
-        public string Build_name /*override property*/
+        public string Build_name /* property*/
         {
             set { build_name = value; }
             get { return build_name; }
         }
 
 
-        public int Drawing_number /*override property*/
+        public int Drawing_number /* property*/
 
         {
             set { drawing_number = value; }
             get { return drawing_number; }
         }
-        public String Request_statue /*override property*/
+        public string Request_statue // property
         {
             get { return request_statue; }
             set { request_statue = value; }
@@ -94,7 +94,7 @@ namespace constructions
             set { approved_Level = value; }
         }
 
-        public double Asbuilt_level //override property
+        public double Asbuilt_level // property
         {
             get { return asbuilt_level; }
             set { asbuilt_level = value; }
@@ -106,7 +106,7 @@ namespace constructions
             set { approved_points = value; }
 
         }
-        public string Measurement_points //override property
+        public string Measurement_points // property
         {
             get { return measurement_points; }
             set { measurement_points = value; }
@@ -119,33 +119,33 @@ namespace constructions
             measure_distant =Math.Sqrt(x + y);
             return  Math.Sqrt(x + y);
         }
-        public double Area(double x, double y, double z)//inherant overloading method from enterface conseltat1
+        public double Area(double x, double y, double z)//override method from interface quantity
         {
             double s = (x + y + z) / 2;
             return Math.Sqrt(s * (s - x) * (s - y) * (s - z));
         }
-        public double Area(double x, double y) //inherant overloading method from enterface conseltat1
+        public double Area(double x, double y) //override method from interface quantity
         {
             return x * y;
 
         }
-        public override double Deference(double index1, double index2)//override method
+        public override double Deference(double index1, double index2)//override method from abstract class consultant
         {
             return index1 - index2;
 
         }
-        public double Volume(double area, double Approved_Level, double asbuilt_level)
+        public double Volume(double area, double Approved_Level, double asbuilt_level)//method from interface quantity
         { return area * (Approved_Level - asbuilt_level); 
            
         }
 
 
-        public survey_report()
+        public survey_report()//default constructor
         {
 
             Surveyor_name = "mohamad alshamali";
             Request_no =0;
-            Conseltant_name = "name";
+            Consultant_name = "name";
 
             Datetime = "2025";
 
@@ -163,9 +163,10 @@ namespace constructions
             
 
         }
-        public survey_report(int x)
+        public survey_report(int x)//overloading constructor take one parameter
 
-        {POINT.GetValue(0,0);   
+        {
+            POINT.GetValue(0,0);   
             request_no = x;
             
             
@@ -176,7 +177,7 @@ namespace constructions
 
 
         
-        public survey_report(double x1, double y1, double x2, double y2)
+        public survey_report(double x1, double y1, double x2, double y2)//overloading constructor take four parameter
         {
 
             measure_distant = Measure_distant(x1, y1, x2, y2);
@@ -184,7 +185,7 @@ namespace constructions
 
         }
 
-        public survey_report(double x, double y, double z)
+        public survey_report(double x, double y, double z)//overloading constructor take three parameter
         {
 
             area = Area(x, y, z);
@@ -192,7 +193,7 @@ namespace constructions
 
 
         }
-        public survey_report(double area, double Approved_Level, double asbuilt_level, string build_name)
+        public survey_report(double area, double Approved_Level, double asbuilt_level, string build_name)//overloading constructor take four parameter
 
         {
 
@@ -200,7 +201,7 @@ namespace constructions
             Build_name = build_name;
         }
 
-        public survey_report( int n ,double x1, double y1, double x2, double y2, double A, double B, double m1)
+        public survey_report( int n ,double x1, double y1, double x2, double y2, double A, double B, double m1)//overloading constructor take seven parameter
         { 
             new_point_measure(n,x1, y1, x2, y2, A, B, m1);
 

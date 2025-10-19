@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace constructions
 {
-    internal  abstract class conseltant :data
+    internal  abstract class consultant :data
     {
         /*fields*/
-        protected string datetime;
-        protected string conseltant_name;//Field
+        protected string datetime;//Field
+        protected string consultant_name;//Field
 
         protected string approved_benchmarks;//Field
         protected string approved_points;//Field
 
         protected double approved_Level;//Field
         /*propert */
-        public abstract string Datetime { get; set; }
+        public abstract string Datetime { get; set; }//abstract Property
 
-        public abstract string Conseltant_name { set; get; }//abstract Property
+        public abstract string Consultant_name { set; get; }//abstract Property
 
         public abstract string Approved_benchmarks { set; get; }//abstract Property
         public abstract string Approved_points { set; get; }//abstract Property
