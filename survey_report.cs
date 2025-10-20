@@ -20,7 +20,7 @@ namespace constructions
         public double area;//field
         protected double measure_distant;//field
         public event Notify onstatuechange;//*event declaration*/
-
+       
 
 
         public virtual void check (string statue) //method to check request statue and trigger event if not accepted
@@ -144,8 +144,8 @@ namespace constructions
         {
 
             Surveyor_name = "mohamad alshamali";
-            Request_no =0;
-            Consultant_name = "name";
+            Request_no =1;
+            Consultant_name = "DAR ALHANDSA";
 
             Datetime = "2025";
 
@@ -201,9 +201,9 @@ namespace constructions
             Build_name = build_name;
         }
 
-        public survey_report( int n ,double x1, double y1, double x2, double y2, double A, double B, double m1)//overloading constructor take seven parameter
+        public survey_report( int ROW,string name ,double x1, double y1, double x2, double y2, double A, double B, bool m1)//overloading constructor take seven parameter
         { 
-            new_point_measure(n,x1, y1, x2, y2, A, B, m1);
+            new_point_measure(ROW,name,x1, y1, x2, y2, A, B, m1);
 
 
         }

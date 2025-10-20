@@ -9,89 +9,110 @@ namespace constructions
     internal  class data 
     {
         public  Dictionary<string, (double X, double Y)> points = new Dictionary<string, (double X, double Y)>();// create dictionary to store points
-        public  double[,] POINT=new double [100,100];// create array to store points
+        public  string[,] POINT=new string [100,4];// create array to store points
         public static string surveyors_list;// create static field to store surveyors list
         public static string  building_list;// create static field to store building list
         public static string approve_drawings_list;// create static field to store approve drawings list
-        public static string survey_requests;// create static field to store survey requests list   
-        public  double X(int ROW) 
+        public static string survey_requests;// create static field to store survey requests list
+                                             //   public static double DEGREE = 0.01745329251994329576;
+        public const double RADIAN = 57.2957795130823208768;
+        public const double PI = 3.14159265358979323846;
+        public const double DEGREE = 0.01745329251994329576;
+        public  string X(int ROW ) 
         {
 
-            
-            
-                return POINT[ROW,0];
+                return POINT[ROW,2];
             }
-        public  double Y(int ROW)
+        public  string Y(int ROW)
         { 
 
             
            
-            return POINT[ROW,1];
+            return POINT[ROW,3];
         }
+        public  string NAME(int ROW)
+        {return POINT[ROW,1]; }
+
+
         
-        public  double DEGREE = 0.01745329251994329576;
         public  double A(double B, double c) { return Math.Sqrt(B * B + c * c); }// method to calculate hypotenuse of right triangle   
-        public  void STORE_POINT( int row,double X,double Y)// method to store point in dictionary and array
+        public  void STORE_POINT( int row,string name,double X,double Y)// method to store point in dictionary and array
         {
-            int n = points.Count + 1;
-            n = row + n;
-            string name= "point " + n.ToString();
-      
-            points.Add(name, (X, Y));
-            POINT[row, 0] = X; POINT[row, 1] =Y;
-          
-           
-            Console.WriteLine("{0} stored in points:{1}",name, points[ name]);
-            Console.WriteLine("new point stored X={1},Y={2} ,name:p({0})",row,POINT.GetValue(row,0 ), POINT.GetValue(row, 1));
+            POINT[row, 0] = row.ToString();
+            POINT[row,1] = name;
+            POINT[row,2] = X.ToString();
+            POINT[row,3] = Y.ToString();
+
+            
+            Console.WriteLine("Point stored  row={0},name={1},X={2},Y={3}  ", POINT.GetValue(row,0 ), POINT.GetValue(row, 1) ,POINT.GetValue(row,2), POINT.GetValue(row,3)  );
            
         }
-        public double angel_from_ab_to_ac_turn_left (double D1,double D2,double D3)// method to calculate angle from lengths of triangle sides
+        public double angel (double A,double B,double C)// method to calculate angle from lengths of triangle sides
 
         {
+           
+           double Z= (Math.Pow(C, 2) + Math.Pow(B, 2) - Math.Pow(A, 2)) / (2 * B * C);
 
-           return (Math.Pow(D1, 2) + Math.Pow(D3, 2) - Math.Pow(D2, 2)) / (2 * D1 * D3);// return angle in radian
+           return (Math.Acos(Z)); 
         }
-        
-        public  void  new_point_measure (int name, double x1, double y1 ,double x2,double y2,double D1,double D2 ,double a)// (a=b^2+c^2-a^2)/2ab // method to calculate new point coordinates and store it
+        public static double Measure_distance(double x1, double y1, double x2, double y2)// method to calculate distance between two points
         {
+            double x = Math.Pow(x1 - x2, 2);
+            double y = Math.Pow(y1 - y2, 2);
 
+            return Math.Sqrt(x + y);
+        }
 
+        public void new_point_measure(int row, string name, double x1, double y1, double x2, double y2, double A, double B,  bool R)//a:  بعكس اتجاه عقارب الساعة 
+        {
+            double C = Measure_distance(x1, y1, x2, y2);
+
+            
+            double a = angel_A(A, B, C);
+            if (R == false) { a = -a; };
+            
             double m0 = (y2 - y1) / (x2 - x1);// ميل المستقيم ab
-            double m1; //ميل المستقيم ac
-            double  x;// احداثي x للنقطة الجديدة
+            double m1 = Math.Tan(Math.Atan(m0) + a);  //ميل المستقيم ac
+            double x;// احداثي x للنقطة الجديدة
             double y;// احداثي y للنقطة الجديدة
-                 
+            
 
-            m1 = (m0 + Math.Tan(a)) / (1 - m0 * Math.Tan(a));// حساب ميل المستقيم ac
 
-          
-            double z = (Math.Pow(D1, 2) - Math.Pow(D2, 2) + Math.Pow(x2, 2) - Math.Pow(x1, 2) + Math.Pow(y2, 2) - Math.Pow(y1, 2))/2;// حساب z
-
-            x = (z + m1 * x1 * (y2 - y1) - y2 * (y2 - y1)) / (x2 - x1) + m1 * (y2 - y1);// حساب احداثي x للنقطة الجديدة
+            double z = (Math.Pow(B, 2) - Math.Pow(A, 2) + Math.Pow(x2, 2) - Math.Pow(x1, 2) + Math.Pow(y2, 2) - Math.Pow(y1, 2));// حساب z
+            x = (z / 2 + m1 * x1 * (y2 - y1) - y1 * (y2 - y1)) / ((x2 - x1) + m1 * (y2 - y1));// حساب احداثي x للنقطة الجديدة
             y = m1 * (x - x1) + y1;// حساب احداثي y للنقطة الجديدة
 
-            
-            
+
+
+
+
             int n = points.Count + 1;// موقع النقطة الجديدة في القاموس
-            String ne = "point " + name.ToString();// انشاء اسم للنقطة الجديدة
+
+            String ne = name + row.ToString();// انشاء اسم للنقطة الجديدة
             points.Add(ne, (x, y));// تخزين النقطة في القاموس
-            Console.WriteLine("{0} stored in points:{1}",ne, points[ne]);// اظهار النقطة المخزنة
-            if (name > 100)
-               Console.WriteLine("enter  name <100");// التحقق من صحة اسم النقطة
-            else
-                
-            STORE_POINT(name, x, y); // تخزين النقطة
-            Console.WriteLine(" measured point have stored in array :x={0},y={1} p({2})",X(name), Y(name),name);// اظهار النقطة المخزنة
-            
-
-            
+            Console.WriteLine("point stored in dictionary points:{0} ,{1}", ne, points[ne]);// اظهار النقطة المخزنة
 
 
-
-
-
-
+            STORE_POINT(row, name, x, y); // تخزين النقطة
 
         }
+
+              public static double angel_A(double A, double B, double C)// method to calculate angle from lengths of triangle sides
+
+        {
+
+            double Z = (Math.Pow(C, 2) + Math.Pow(B, 2) - Math.Pow(A, 2)) / (2 * B * C);
+            double a=Math.Acos(Z);
+            return a / DEGREE;
+           
+        }
+
+
+
+
+
+
+
+       
     }
 }

@@ -11,7 +11,7 @@
   <Class Name="constructions.relation">
     <Position X="8.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAAAACAgAAAAAAAAABAAAAAEgAAAAAAAACAMACAACA=</HashCode>
+      <HashCode>YAAAAACAgAAAAAAAAABAAAAAEgAAAAAAAAAAMACAACA=</HashCode>
       <FileName>relation.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -22,22 +22,16 @@
       <FileName>document_control.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="constructions.data">
-    <Position X="3" Y="0.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>IAABAACAACAAAAAABABAAAAAEgAAAAAAAAAAoAAAYAA=</HashCode>
-      <FileName>data.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="constructions.consultant">
-    <Position X="4.5" Y="0.5" Width="1.5" />
+    <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAIAAAAAABCAAEIQAAJCAAAAAAAAAAAAAAAAABAAAA=</HashCode>
       <FileName>consultant.cs</FileName>
+      <NewMemberFileName>data.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="constructions.quantity">
-    <Position X="6.25" Y="2" Width="1.5" />
+    <Position X="6.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAQAAAAA=</HashCode>
       <FileName>quantity.cs</FileName>
