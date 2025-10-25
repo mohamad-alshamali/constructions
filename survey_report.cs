@@ -200,10 +200,23 @@ namespace constructions
             volume = Volume(area, Approved_Level, asbuilt_level);
             Build_name = build_name;
         }
+        int row;
+        public void IncrementCounter()
+        {
+            for (int r = 0; r < 100; r++)
+            {
+                if (POINT[r, 0] == null)
+                {
+                    row = r;
+                    break;
+                }
+            }
 
-        public survey_report( int ROW,string name ,double x1, double y1, double x2, double y2, double A, double B, bool m1)//overloading constructor take seven parameter
+        }
+
+        public survey_report( string name ,double x1, double y1, double x2, double y2, double A, double B,  int row ,bool r)//overloading constructor take seven parameter
         { 
-            new_point_measure(ROW,name,x1, y1, x2, y2, A, B, m1);
+            new_point_measure(name,x1, y1, x2, y2, A, B, row,r);
 
 
         }

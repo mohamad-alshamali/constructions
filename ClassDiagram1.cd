@@ -23,15 +23,22 @@
     </TypeIdentifier>
   </Class>
   <Class Name="constructions.consultant">
-    <Position X="2.5" Y="0.5" Width="1.5" />
+    <Position X="3.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAIAAAAAABCAAEIQAAJCAAAAAAAAAAAAAAAAABAAAA=</HashCode>
       <FileName>consultant.cs</FileName>
       <NewMemberFileName>data.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="constructions.data" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAABAACAgAAAAAAABABAAAAAEgAAAAAAAAAAsACAYGA=</HashCode>
+      <FileName>data.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Interface Name="constructions.quantity">
-    <Position X="6.25" Y="2.25" Width="1.5" />
+    <Position X="6" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAQAAAAA=</HashCode>
       <FileName>quantity.cs</FileName>

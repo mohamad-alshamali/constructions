@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,15 +38,27 @@ namespace constructions
 
         
         public  double A(double B, double c) { return Math.Sqrt(B * B + c * c); }// method to calculate hypotenuse of right triangle   
-        public  void STORE_POINT( int row,string name,double X,double Y)// method to store point in dictionary and array
+        public  void STORE_POINT( int row,string name,double X,double Y)// method to store point in array
         {
-            POINT[row, 0] = row.ToString();
-            POINT[row,1] = name;
-            POINT[row,2] = X.ToString();
-            POINT[row,3] = Y.ToString();
+            int r=1;
+            for (int i = 0; i < 100; i++)
+            {
+                if (POINT[i, 0] == null)
+                {
+                    r = i;
+                    break;
+                }
+
+            }
+
+
+            POINT[r, 0] = row.ToString();
+            POINT[r,1] = name;
+            POINT[r,2] = X.ToString();
+            POINT[r,3] = Y.ToString();
 
             
-            Console.WriteLine("Point stored  row={0},name={1},X={2},Y={3}  ", POINT.GetValue(row,0 ), POINT.GetValue(row, 1) ,POINT.GetValue(row,2), POINT.GetValue(row,3)  );
+            Console.WriteLine("Point stored  row={0},name={1},X={2},Y={3}  ", POINT.GetValue(r,0 ), POINT.GetValue(r, 1) ,POINT.GetValue(r,2), POINT.GetValue(r,3)  );
            
         }
         public double angel (double A,double B,double C)// method to calculate angle from lengths of triangle sides
@@ -62,12 +76,20 @@ namespace constructions
 
             return Math.Sqrt(x + y);
         }
+        
 
-        public void new_point_measure(int row, string name, double x1, double y1, double x2, double y2, double A, double B,  bool R)//a:  بعكس اتجاه عقارب الساعة 
+        public void new_point_measure(   string name, double x1, double y1, double x2, double y2, double A, double B,  int row=1, bool R = true)//a:  بعكس اتجاه عقارب الساعة 
         {
-            double C = Measure_distance(x1, y1, x2, y2);
+
 
             
+            double C = Measure_distance(x1, y1, x2, y2);
+            if (((A + B) < C) || ((x1 == x2) && (y1 == y2)))
+            {
+                Console.WriteLine("ERROR: INVALID  INTERSECTION");
+                return;
+            }
+
             double a = angel_A(A, B, C);
             if (R == false) { a = -a; };
             
@@ -94,6 +116,7 @@ namespace constructions
 
 
             STORE_POINT(row, name, x, y); // تخزين النقطة
+
 
         }
 

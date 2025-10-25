@@ -28,18 +28,24 @@ namespace constructions
            
         }
         
-        public static void new_point_measure(string name, double x1, double y1, double x2, double y2, double A, double B,  bool  R  )//RIGHT OR LEFT:  بعكس اتجاه عقارب الساعة
+        public static void new_point_measure(string name, double x1, double y1, double x2, double y2, double A, double B,  bool  R=true  )//RIGHT OR LEFT:  بعكس اتجاه عقارب الساعة
         {
             double C = Measure_distance(x1, y1, x2, y2);
 
 
           double  a = DEGREE*angel_A(A, B, C);
+            if (((A+B)<C)||((x1==x2)&&( y1==y2)))
+            {
+                Console.WriteLine("ERROR: INVALID  INTERSECTION");
+                return;
+            }
+
 
             if (R==false) {a=-a; }
 
             double m0 = (y2 - y1) / (x2 - x1);// ميل المستقيم ab
             double g= Math.Atan(m0);
-            double m1=Math.Tan(2*PI +a+g); //ميل المستقيم ac
+            double m1=Math.Tan( a+g); //ميل المستقيم ac
             double x;// احداثي x للنقطة الجديدة   
             double y;// احداثي y للنقطة الجديدة
                      
@@ -70,10 +76,10 @@ namespace constructions
         
         public static double Measure_distance(double x1, double y1, double x2, double y2)// method to calculate distance between two points
         {
-            double x = Math.Pow(x1 - x2, 2);
-            double y = Math.Pow(y1 - y2, 2);
-         
-            return Math.Sqrt(x + y);
+            double x = Math.Pow((x1 - x2), 2);
+            double y = Math.Pow((y1 - y2), 2);
+            
+            return  Math.Round(Math.Sqrt (x + y));
         }
     }
     }
