@@ -1,17 +1,93 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace constructions
 {
-    internal  class data 
-    {
-        public  Dictionary<string, (double X, double Y)> points = new Dictionary<string, (double X, double Y)>();// create dictionary to store points
+    internal  class data
+    { 
+     
+
+      protected static string build_name;
+        protected static int request_no;
+    
+        
+        public static  void write(string path, string number/*,ref string build_name, ref int request_no*/)
+        {
+            
+           
+         FileStream fsw = new FileStream(path, FileMode.Append, FileAccess.Write);
+        StreamWriter sw = new StreamWriter(fsw);
+
+            sw.WriteLine(number);
+            sw.Close();
+            fsw.Close();
+
+        }
+        static string path = string.Format("C:\\ data4.txt");
+        static string counter1 = "C:\\Counter2.txt";
+        static string read(string path,int col=1,int col_width=5)// default read from
+        {
+            FileStream fsr = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Read);
+            StreamReader sr = new StreamReader(fsr);
+            string line = File.ReadLines(path).LastOrDefault();
+
+
+            sr.Close();
+            fsr.Close();
+            if (string.IsNullOrEmpty(line))
+                return "0";
+            if (line.Length > col_width)
+                
+                return line.Substring(col, col_width);
+            else return line;
+
+        }
+        static void write_counter(string Path,int row)
+        {
+            FileStream fsr = new FileStream(counter1, FileMode.Truncate, FileAccess.ReadWrite);
+            StreamWriter sr = new StreamWriter(fsr);
+
+            sr.Write(row);
+            sr.Close();
+            fsr.Close() ;
+
+        }
+        static int read_counter(string path)
+        {
+            FileStream fsr = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Read);
+            StreamReader sr = new StreamReader(fsr);
+           string C=sr.ReadLine();
+            sr.Close();
+            fsr.Close();
+            if (string.IsNullOrEmpty(C))
+                return 0;
+            else
+
+            return int.Parse(C);
+            
+        }
+
+        //static string set = write(counter1,"0");
+
+
+
+
+
+        public Dictionary<string, (double X, double Y)> points = new Dictionary<string, (double X, double Y)>();// create dictionary to store points
         public  string[,] POINT=new string [100,4];// create array to store points
+       
+        
+       
+
         public static string surveyors_list;// create static field to store surveyors list
         public static string  building_list;// create static field to store building list
         public static string approve_drawings_list;// create static field to store approve drawings list
@@ -20,6 +96,7 @@ namespace constructions
         public const double RADIAN = 57.2957795130823208768;
         public const double PI = 3.14159265358979323846;
         public const double DEGREE = 0.01745329251994329576;
+
         public  string X(int ROW ) 
         {
 
@@ -34,31 +111,35 @@ namespace constructions
         }
         public  string NAME(int ROW)
         {return POINT[ROW,1]; }
+        int C = read_counter(counter1);
 
-
-        
         public  double A(double B, double c) { return Math.Sqrt(B * B + c * c); }// method to calculate hypotenuse of right triangle   
-        public  void STORE_POINT( int row,string name,double X,double Y)// method to store point in array
+        public  void STORE_POINT( string point_name,double X,double Y)// method to store point in array
         {
-            int r=1;
-            for (int i = 0; i < 100; i++)
+           
+            // int C= read_counter(counter1);
+
+            for (int i = C+1; i < 100; i++)
             {
                 if (POINT[i, 0] == null)
                 {
-                    r = i;
+
+                    C= i;
                     break;
                 }
 
             }
 
-
-            POINT[r, 0] = row.ToString();
-            POINT[r,1] = name;
-            POINT[r,2] = X.ToString();
-            POINT[r,3] = Y.ToString();
-
+            POINT[C, 0] = C.ToString();
+            POINT[C,1] = point_name;
+            POINT[C,2] = X.ToString();
+            POINT[C,3] = Y.ToString();
             
-            Console.WriteLine("Point stored  row={0},name={1},X={2},Y={3}  ", POINT.GetValue(r,0 ), POINT.GetValue(r, 1) ,POINT.GetValue(r,2), POINT.GetValue(r,3)  );
+            write(path ,string.Format("{0,5} {1,10} {2,10:F3} {3,10:F3}", C, point_name, X,Y));
+            
+            write_counter(counter1,C);
+
+            Console.WriteLine("Point stored  row={0},name={1},X={2},Y={3} , ", POINT.GetValue(C,0 ), POINT.GetValue(C, 1) ,POINT.GetValue(C,2), POINT.GetValue(C,3)  );
            
         }
         public double angel (double A,double B,double C)// method to calculate angle from lengths of triangle sides
@@ -75,6 +156,7 @@ namespace constructions
             double y = Math.Pow(y1 - y2, 2);
 
             return Math.Sqrt(x + y);
+
         }
         
 
@@ -115,8 +197,9 @@ namespace constructions
             Console.WriteLine("point stored in dictionary points:{0} ,{1}", ne, points[ne]);// اظهار النقطة المخزنة
 
 
-            STORE_POINT(row, name, x, y); // تخزين النقطة
-
+            STORE_POINT( name, x, y); // تخزين النقطة
+           
+            
 
         }
 

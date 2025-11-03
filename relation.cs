@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ namespace constructions
 {
     internal static  class relation
     {
+    
+
         public static Dictionary<string, (double X, double Y)> points = new Dictionary<string, (double X, double Y)>();// create dictionary to store points
         public static double DEGREE = 0.01745329251994329576;
         public static double RADIAN = 57.2957795130823208768;

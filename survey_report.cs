@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,12 +8,12 @@ using System.Threading.Tasks;
 namespace constructions
 {
     public delegate void Notify(string message);//*delegate declaration*/
-    internal class survey_report :consultant, quantity//*derived class from abstract class consultant and interface quantity*/
+    internal class survey_report : consultant, quantity//*derived class from abstract class consultant and interface quantity*/
     {
-        
-        protected int request_no;/*field*/
+
+       // protected static int request_no;/*field*/
         protected string request_statue;/*field*/
-        protected string build_name;/*field*/
+       // public static string build_name;/*field*/
         protected int drawing_number;/*field*/
         protected string surveyor_name;/* field*/
         protected string measurement_points;/*field*/
@@ -20,8 +21,7 @@ namespace constructions
         public double area;//field
         protected double measure_distant;//field
         public event Notify onstatuechange;//*event declaration*/
-       
-
+      
 
         public virtual void check (string statue) //method to check request statue and trigger event if not accepted
         {
@@ -200,21 +200,10 @@ namespace constructions
             volume = Volume(area, Approved_Level, asbuilt_level);
             Build_name = build_name;
         }
-        int row;
-        public void IncrementCounter()
-        {
-            for (int r = 0; r < 100; r++)
-            {
-                if (POINT[r, 0] == null)
-                {
-                    row = r;
-                    break;
-                }
-            }
+        
+     
 
-        }
-
-        public survey_report( string name ,double x1, double y1, double x2, double y2, double A, double B,  int row ,bool r)//overloading constructor take seven parameter
+        public survey_report(string build_name,string request_no,  string name ,double x1, double y1, double x2, double y2, double A, double B,  int row ,bool r)//overloading constructor take seven parameter
         { 
             new_point_measure(name,x1, y1, x2, y2, A, B, row,r);
 

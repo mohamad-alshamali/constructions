@@ -1,19 +1,26 @@
 ﻿using System;
+
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace constructions
 {
+  
     internal class document_control 
     {
         static void Main()
         {
+           
+           
             Console.WriteLine(" relation class tests :",relation. DEGREE *relation. angel_A(15, 15,42));
             Console.WriteLine(" {0}", relation.Measure_distance(30, 60, 60, 30));
             Console.WriteLine("  angel={0},", relation.angel_A(3, 5, 4));
-            relation.new_point_measure("benchmark", 30, 60, 30, 60, 25, 25, true);// add benchmark point to relation points
+            relation.new_point_measure("benchmark", 0, 0, 30, 0, 25, 25, false);// add benchmark point to relation points
+            relation.new_point_measure("benchmark", 60, 60, 30, 60, 25, 25, true);
+            relation.new_point_measure("benchmark", 60, 60, 30, 60, 25, 25, true);
             relation.new_point_measure("a", 0, 0, 8, 0, 5, 5, true);
             relation.new_point_measure("as builte", 0, 0, 8,0, 5, 5, false);// add as builte point to relation points
            Console.WriteLine( "DISTANCE ={0}",relation.Measure_distance(50, 100, 100, 200));
@@ -24,9 +31,11 @@ namespace constructions
             request1.new_point_measure("asbuilt",0 ,0,80, 0, 50, 50,1,true);
             request1.Measure_distant(500, 350, 200, 250);
             request1.angel(150, 200, 316.227);
+            request1.Build_name = "hospital";
+            request1.Request_no = 1;
             request1.new_point_measure("Benchmark", 500, 350, 200, 250, 300, 200,2, true);//  put angel as it must be if it measured in site for give right result
 
-            request1.STORE_POINT(3,"NGL" ,54.5, 32.44);// store new point in request1 points
+            request1.STORE_POINT("NGL" ,54.5, 32.44);// store new point in request1 points
 
             Console.WriteLine("surveyor name: {0} ,\n" + // 
                 " request no:{1},\n benchmarks: {2},\n" +
@@ -39,7 +48,7 @@ namespace constructions
             survey_report request2 = new survey_report(10, 20, 20, 30); // new object request2
             Console.WriteLine(" distant 1={0} ", request2.Measure_distant(20,30,40,50));//request2 SET field  measure_distant and return that value
             //MEASURE POINT IN REQUEST4 by constructor overloading take 7 parameter//
-            survey_report REQUEST4 = new survey_report("asbuilt",0,0,60,60,100,100,1,true);// calculate new point coordinate  and add it to request4 points
+            survey_report REQUEST4 = new survey_report("school","1","asbuilt",0,0,60,60,100,100,1,true);// calculate new point coordinate  and add it to request4 points
             //Give value to request3 by constructor overloading take 4 parameter
             survey_report request3 = new survey_report(10, 20, 30, "school");
          
