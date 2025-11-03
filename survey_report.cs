@@ -11,9 +11,8 @@ namespace constructions
     internal class survey_report : consultant, quantity//*derived class from abstract class consultant and interface quantity*/
     {
 
-       // protected static int request_no;/*field*/
         protected string request_statue;/*field*/
-       // public static string build_name;/*field*/
+    
         protected int drawing_number;/*field*/
         protected string surveyor_name;/* field*/
         protected string measurement_points;/*field*/
@@ -60,12 +59,12 @@ namespace constructions
 
             set { approved_benchmarks = value; }
         }
-        public int Request_no //  property
+        public  int Request_no //  property
         {
             set { request_no = value; }
             get { return request_no; }
         }
-        public string Build_name /* property*/
+        public  string Build_name /* property*/
         {
             set { build_name = value; }
             get { return build_name; }
@@ -167,7 +166,7 @@ namespace constructions
 
         {
             POINT.GetValue(0,0);   
-            request_no = x;
+            Request_no = x;
             
             
         }
@@ -203,11 +202,14 @@ namespace constructions
         
      
 
-        public survey_report(string build_name,string request_no,  string name ,double x1, double y1, double x2, double y2, double A, double B,  int row ,bool r)//overloading constructor take seven parameter
-        { 
-            new_point_measure(name,x1, y1, x2, y2, A, B, row,r);
+        public survey_report(  string name ,double x1, double y1, double x2, double y2, double A, double B,bool r, string build = "SCHOOL1", int request = 1)//overloading constructor take seven parameter
+        {
+           Build_name = build;
+            Request_no = request;
 
+            new_point_measure(name,x1, y1, x2, y2, A, B,r);
 
+            
         }
 
     }

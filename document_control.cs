@@ -28,12 +28,15 @@ namespace constructions
             survey_report request1 = new survey_report();
            Console.WriteLine(  " distant {0} ",request1.Measure_distant(500, 350, 200, 250));
            Console.WriteLine(" angel A ={0} Degree" ,request1.angel(50, 40, 30));
-            request1.new_point_measure("asbuilt",0 ,0,80, 0, 50, 50,1,true);
+            request1.Build_name = "villa";
+            request1.Request_no = 1;
+            request1.new_point_measure("asbuilt",0 ,0,80, 0, 50, 50,true);
+            request1.new_point_measure("asbuilt", 40, 36, 70, 80, 50, 50, true);
             request1.Measure_distant(500, 350, 200, 250);
             request1.angel(150, 200, 316.227);
             request1.Build_name = "hospital";
-            request1.Request_no = 1;
-            request1.new_point_measure("Benchmark", 500, 350, 200, 250, 300, 200,2, true);//  put angel as it must be if it measured in site for give right result
+          
+            request1.new_point_measure("Benchmark", 500, 350, 200, 250, 300, 200, true);//  put angel as it must be if it measured in site for give right result
 
             request1.STORE_POINT("NGL" ,54.5, 32.44);// store new point in request1 points
 
@@ -48,7 +51,7 @@ namespace constructions
             survey_report request2 = new survey_report(10, 20, 20, 30); // new object request2
             Console.WriteLine(" distant 1={0} ", request2.Measure_distant(20,30,40,50));//request2 SET field  measure_distant and return that value
             //MEASURE POINT IN REQUEST4 by constructor overloading take 7 parameter//
-            survey_report REQUEST4 = new survey_report("school","1","asbuilt",0,0,60,60,100,100,1,true);// calculate new point coordinate  and add it to request4 points
+            survey_report REQUEST4 = new survey_report("asbuilt",0,0,60,60,100,100,true,"school1",1);// calculate new point coordinate  and add it to request4 points
             //Give value to request3 by constructor overloading take 4 parameter
             survey_report request3 = new survey_report(10, 20, 30, "school");
          
@@ -60,7 +63,7 @@ namespace constructions
 
 
 
-            Console.WriteLine(" build name :{0}, volume:{1} ", request3.Build_name, request3.volume,request3.Request_no);// show request3 fields certained in constructor (four parameter)//
+            Console.WriteLine(" build name :{0}, volume:{1} ",request3.Build_name, request3.volume,request3.Request_no);// show request3 fields certained in constructor (four parameter)//
 
             request3.onstatuechange += Request3_onstatuechange;// subscribe event handler to event
 

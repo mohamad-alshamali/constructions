@@ -16,26 +16,28 @@ namespace constructions
     { 
      
 
-      protected static string build_name;
-        protected static int request_no;
-    
-        
-        public static  void write(string path, string number/*,ref string build_name, ref int request_no*/)
+        protected  string build_name;
+        protected int request_no;
+
+
+        public static void write(string build, int req, string number/*,ref string build_name, ref int request_no*/)
         {
-            
-           
-         FileStream fsw = new FileStream(path, FileMode.Append, FileAccess.Write);
-        StreamWriter sw = new StreamWriter(fsw);
+            string path = string.Format("C:\\{0}{1}.txt", build, req);
+
+
+            FileStream fsw = new FileStream(path, FileMode.Append, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fsw);
 
             sw.WriteLine(number);
             sw.Close();
             fsw.Close();
-
         }
-        static string path = string.Format("C:\\ data4.txt");
-        static string counter1 = "C:\\Counter2.txt";
-        static string read(string path,int col=1,int col_width=5)// default read from
+
+      
+       // public  string counter1 = "C:\\Counter2.txt";
+        public static string read(string build,int req,int col=1,int col_width=5)// default read from
         {
+            string path = string.Format("C:\\{0}{1}.txt", build, req);
             FileStream fsr = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Read);
             StreamReader sr = new StreamReader(fsr);
             string line = File.ReadLines(path).LastOrDefault();
@@ -51,9 +53,11 @@ namespace constructions
             else return line;
 
         }
-        static void write_counter(string Path,int row)
+        public  void write_counter(string build, int req, int row)
         {
-            FileStream fsr = new FileStream(counter1, FileMode.Truncate, FileAccess.ReadWrite);
+           
+            string counter1 = string.Format("C:\\{0}{1}{2}.txt",build,req,"counter");
+        FileStream fsr = new FileStream(counter1, FileMode.Truncate, FileAccess.ReadWrite);
             StreamWriter sr = new StreamWriter(fsr);
 
             sr.Write(row);
@@ -61,9 +65,10 @@ namespace constructions
             fsr.Close() ;
 
         }
-        static int read_counter(string path)
+        public  int read_counter(string build, int req)
         {
-            FileStream fsr = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Read);
+            string counter1 = string.Format("C:\\{0}{1}{2}.txt", build, req, "counter");
+            FileStream fsr = new FileStream(counter1, FileMode.OpenOrCreate, FileAccess.Read);
             StreamReader sr = new StreamReader(fsr);
            string C=sr.ReadLine();
             sr.Close();
@@ -75,10 +80,6 @@ namespace constructions
             return int.Parse(C);
             
         }
-
-        //static string set = write(counter1,"0");
-
-
 
 
 
@@ -111,13 +112,13 @@ namespace constructions
         }
         public  string NAME(int ROW)
         {return POINT[ROW,1]; }
-        int C = read_counter(counter1);
+        
 
         public  double A(double B, double c) { return Math.Sqrt(B * B + c * c); }// method to calculate hypotenuse of right triangle   
-        public  void STORE_POINT( string point_name,double X,double Y)// method to store point in array
+        public  void STORE_POINT(string point_name,double X,double Y)// method to store point in array
         {
            
-            // int C= read_counter(counter1);
+           int C=read_counter(build_name,request_no);
 
             for (int i = C+1; i < 100; i++)
             {
@@ -135,9 +136,9 @@ namespace constructions
             POINT[C,2] = X.ToString();
             POINT[C,3] = Y.ToString();
             
-            write(path ,string.Format("{0,5} {1,10} {2,10:F3} {3,10:F3}", C, point_name, X,Y));
+            write(build_name,request_no ,string.Format("{0,5} {1,10} {2,10:F3} {3,10:F3}", C, point_name, X,Y));
             
-            write_counter(counter1,C);
+            write_counter(build_name, request_no, C);
 
             Console.WriteLine("Point stored  row={0},name={1},X={2},Y={3} , ", POINT.GetValue(C,0 ), POINT.GetValue(C, 1) ,POINT.GetValue(C,2), POINT.GetValue(C,3)  );
            
@@ -158,9 +159,9 @@ namespace constructions
             return Math.Sqrt(x + y);
 
         }
-        
 
-        public void new_point_measure(   string name, double x1, double y1, double x2, double y2, double A, double B,  int row=1, bool R = true)//a:  بعكس اتجاه عقارب الساعة 
+        int row = 1;
+        public void new_point_measure(   string name, double x1, double y1, double x2, double y2, double A, double B,   bool R = true)//a:  بعكس اتجاه عقارب الساعة 
         {
 
 
@@ -188,7 +189,7 @@ namespace constructions
 
 
 
-
+           
 
             int n = points.Count + 1;// موقع النقطة الجديدة في القاموس
 
@@ -198,7 +199,7 @@ namespace constructions
 
 
             STORE_POINT( name, x, y); // تخزين النقطة
-           
+            row++;
             
 
         }
