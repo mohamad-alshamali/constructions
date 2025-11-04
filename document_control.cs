@@ -15,27 +15,34 @@ namespace constructions
         {
            
            
-            Console.WriteLine(" relation class tests :",relation. DEGREE *relation. angel_A(15, 15,42));
-            Console.WriteLine(" {0}", relation.Measure_distance(30, 60, 60, 30));
-            Console.WriteLine("  angel={0},", relation.angel_A(3, 5, 4));
-            relation.new_point_measure("benchmark", 0, 0, 30, 0, 25, 25, false);// add benchmark point to relation points
-            relation.new_point_measure("benchmark", 60, 60, 30, 60, 25, 25, true);
-            relation.new_point_measure("benchmark", 60, 60, 30, 60, 25, 25, true);
-            relation.new_point_measure("a", 0, 0, 8, 0, 5, 5, true);
-            relation.new_point_measure("as builte", 0, 0, 8,0, 5, 5, false);// add as builte point to relation points
-           Console.WriteLine( "DISTANCE ={0}",relation.Measure_distance(50, 100, 100, 200));
-            //overloading constructor take one parameter 
+         Console.WriteLine(" relation class tests :",relation. DEGREE *relation. angel_A(15, 15,42));
+         Console.WriteLine("{0}", relation.Measure_distance(30, 60, 60, 30));
+         Console.WriteLine("angel={0},", relation.angel_A(3, 5, 4));
+
+            //measure//
+         relation.new_point_measure("benchmark", 0, 0, 30, 0, 25, 25, false);// add benchmark point to relation points
+         relation.new_point_measure("benchmark", 60, 60, 30, 60, 25, 25, true);
+         relation.new_point_measure("benchmark", 60, 60, 30, 60, 25, 25, true);
+         relation.new_point_measure("a", 0, 0, 8, 0, 5, 5, true);
+         relation.new_point_measure("as builte", 0, 0, 8,0, 5, 5, false);// add as builte point to relation points
+         Console.WriteLine( "9 DISTANCE ={0}",relation.Measure_distance(50, 100, 100, 200));
+           //overloading constructor take one parameter 
             survey_report request1 = new survey_report();
-           Console.WriteLine(  " distant {0} ",request1.Measure_distant(500, 350, 200, 250));
-           Console.WriteLine(" angel A ={0} Degree" ,request1.angel(50, 40, 30));
+            Console.WriteLine(  " 10 distant {0} ",request1.Measure_distant(500, 350, 200, 250));
+            Console.WriteLine("11 angel A ={0} Degree" ,request1.angel(50, 40, 30));
             request1.Build_name = "villa";
             request1.Request_no = 1;
             request1.new_point_measure("asbuilt",0 ,0,80, 0, 50, 50,true);
+        
             request1.new_point_measure("asbuilt", 40, 36, 70, 80, 50, 50, true);
             request1.Measure_distant(500, 350, 200, 250);
             request1.angel(150, 200, 316.227);
             request1.Build_name = "hospital";
-          
+            request1.Request_no = 1;
+            request1.show_point("villa1", "asbuilt", 0);
+            request1.show_point("villa1", "asbuilt", 1);
+            request1.show_point("villa1", "asbuilt", 2);
+
             request1.new_point_measure("Benchmark", 500, 350, 200, 250, 300, 200, true);//  put angel as it must be if it measured in site for give right result
 
             request1.STORE_POINT("NGL" ,54.5, 32.44);// store new point in request1 points
@@ -49,7 +56,18 @@ namespace constructions
                 " DRAWING NUMBER:{9},\n" +//show request1 fields certained in constructor (one parameter)//
                 " REQUEST STATUE:{10} ", request1.Surveyor_name, request1.Request_no, request1.Approved_benchmarks, request1.Approved_points, request1.Asbuilt_level, request1.Datetime, request1.Approved_Level, request1.Measurement_points, request1.Consultant_name, request1.Drawing_number, request1.Request_statue,request1.X(1),request1.Y(1),request1.X(2),request1.Y(2) ,request1.X(3),request1.Y(3));
             survey_report request2 = new survey_report(10, 20, 20, 30); // new object request2
-            Console.WriteLine(" distant 1={0} ", request2.Measure_distant(20,30,40,50));//request2 SET field  measure_distant and return that value
+            request2.Build_name = "parking";
+            request2.Request_no = 2;
+            request2.new_point_measure("benchmark", 45, 33, 67, 80, 100, 90, true);
+            request2.new_point_measure("dwg", 25, 15, 90, 80, 100, 90, true);
+            request2.new_point_measure("ngl", 500, 500, 1000, 1000, 600, 600, true);
+           // request2.show_point("parking2", "ngl", 0);
+           // request2.show_point("parking2", "benchmark", 0);
+           // request2.show_point("parking2", "dwg", 0);
+            request2.show_point("parking2");
+            request2.show_point("parking2","dwg", 1);
+            request2.show_point("parking2", "ngl", 0);
+            Console.WriteLine("mmm distant 1={0} ", request2.Measure_distant(20,30,40,50));//request2 SET field  measure_distant and return that value
             //MEASURE POINT IN REQUEST4 by constructor overloading take 7 parameter//
             survey_report REQUEST4 = new survey_report("asbuilt",0,0,60,60,100,100,true,"school1",1);// calculate new point coordinate  and add it to request4 points
             //Give value to request3 by constructor overloading take 4 parameter
